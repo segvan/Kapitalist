@@ -1,0 +1,18 @@
+FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim
+EXPOSE 80/tcp
+ENV ASPNETCORE_URLS http://+:80
+ENV ASPNETCORE_ENVIRONMENT Development
+
+WORKDIR /src
+COPY Kapitalist.UserManagement/Kapitalist.UserManagement.csproj ./Kapitalist.UserManagement/Kapitalist.UserManagement.csproj
+COPY Kapitalist.Common/Kapitalist.Common.csproj ./Kapitalist.Common/Kapitalist.Common.csproj
+COPY Kapitalist.UserManagement.sln ./Kapitalist.UserManagement.sln
+RUN dotnet restore Kapitalist.UserManagement.sln
+COPY Kapitalist.UserManagement/ ./Kapitalist.UserManagement/
+COPY Kapitalist.Common/ ./Kapitalist.Common/
+
+RUN dotnet build
+RUN dotnet publish -o /app
+
+WORKDIR /app
+ENTRYPOINT ["dotnet", "Kapitalist.UserManagement.dll"]

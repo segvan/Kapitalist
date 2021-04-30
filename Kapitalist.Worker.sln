@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kapitalist.Worker", "Kapitalist.Worker\Kapitalist.Worker.csproj", "{BD2D6A05-7EFC-44F1-A02B-42193ED4792D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kapitalist.Common", "Kapitalist.Common\Kapitalist.Common.csproj", "{760D97A0-141A-42B5-BC9F-B151C8280296}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BD2D6A05-7EFC-44F1-A02B-42193ED4792D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD2D6A05-7EFC-44F1-A02B-42193ED4792D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD2D6A05-7EFC-44F1-A02B-42193ED4792D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD2D6A05-7EFC-44F1-A02B-42193ED4792D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{760D97A0-141A-42B5-BC9F-B151C8280296}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{760D97A0-141A-42B5-BC9F-B151C8280296}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{760D97A0-141A-42B5-BC9F-B151C8280296}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{760D97A0-141A-42B5-BC9F-B151C8280296}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

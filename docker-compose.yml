@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+
+  worker:
+    build:
+      context: .
+      dockerfile: ./Kapitalist.Worker/Dockerfile
+    restart: always
+
+  rates-db:
+    image: postgres
+    restart: always

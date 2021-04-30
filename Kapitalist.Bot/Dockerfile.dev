@@ -1,0 +1,16 @@
+FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim
+ENV DOTNET_ENVIRONMENT Development
+
+WORKDIR /src
+COPY Kapitalist.Bot/Kapitalist.Bot.csproj ./Kapitalist.Bot/Kapitalist.Bot.csproj
+COPY Kapitalist.Common/Kapitalist.Common.csproj ./Kapitalist.Common/Kapitalist.Common.csproj
+COPY Kapitalist.Bot.sln ./Kapitalist.Bot.sln
+RUN dotnet restore Kapitalist.Bot.sln
+COPY Kapitalist.Bot/ ./Kapitalist.Bot/
+COPY Kapitalist.Common/ ./Kapitalist.Common/
+
+RUN dotnet build
+RUN dotnet publish -o /app
+
+WORKDIR /app
+ENTRYPOINT ["dotnet", "Kapitalist.Bot.dll"]
