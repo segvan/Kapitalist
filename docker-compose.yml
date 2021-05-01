@@ -7,6 +7,14 @@ services:
       dockerfile: ./Kapitalist.Worker/Dockerfile
     restart: always
 
+  rates-api:
+    build:
+      context: .
+      dockerfile: ./Kapitalist.RatesApi/Dockerfile
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=docker
+
   rates-db:
     image: postgres
     restart: always

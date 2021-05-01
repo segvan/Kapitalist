@@ -6,11 +6,11 @@ namespace Kapitalist.UserManagement.Controllers
     [Route("/api/users")]
     public class UsersController : Controller
     {
-        private readonly ILogger<UsersController> _logger;
+        private readonly ILogger<UsersController> logger;
 
         public UsersController(ILogger<UsersController> logger)
         {
-            _logger = logger;
+            this.logger = logger;
         }
         
         [HttpGet("account")]

@@ -1,0 +1,15 @@
+FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim
+
+WORKDIR /src
+COPY Kapitalist.RatesApi/Kapitalist.RatesApi.csproj ./Kapitalist.RatesApi/Kapitalist.RatesApi.csproj
+COPY Kapitalist.Common/Kapitalist.Common.csproj ./Kapitalist.Common/Kapitalist.Common.csproj
+COPY Kapitalist.RatesApi.sln ./Kapitalist.RatesApi.sln
+RUN dotnet restore Kapitalist.RatesApi.sln
+COPY Kapitalist.RatesApi/ ./Kapitalist.RatesApi/
+COPY Kapitalist.Common/ ./Kapitalist.Common/
+
+RUN dotnet build
+RUN dotnet publish -o /app
+
+WORKDIR /app
+ENTRYPOINT ["dotnet", "Kapitalist.RatesApi.dll"]

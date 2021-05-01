@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kapitalist.RatesApi", "Kapitalist.RatesApi\Kapitalist.RatesApi.csproj", "{562F1612-3E61-4A20-9404-46197657BACC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kapitalist.Common", "Kapitalist.Common\Kapitalist.Common.csproj", "{12062393-5819-4092-86B1-98620B3F4E1E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{562F1612-3E61-4A20-9404-46197657BACC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{562F1612-3E61-4A20-9404-46197657BACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{562F1612-3E61-4A20-9404-46197657BACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{562F1612-3E61-4A20-9404-46197657BACC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12062393-5819-4092-86B1-98620B3F4E1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12062393-5819-4092-86B1-98620B3F4E1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12062393-5819-4092-86B1-98620B3F4E1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12062393-5819-4092-86B1-98620B3F4E1E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Kapitalist.RatesApi.Proto";
+
+package greet;
+
+service RatesService {
+  rpc AddRatesSnapshot (RatesSnapshot) returns (google.protobuf.Empty);
+}
+
+message RatesSnapshot {
+  string source = 1;
+  int32 rate_type = 2;
+  google.protobuf.Timestamp time_stamp = 3;
+  repeated Rate currency_values = 4;
+}
+
+message Rate {
+  string from = 1;
+  string to = 2;
+  double rate_ask = 3;
+  double rate_bid = 4;
+}
