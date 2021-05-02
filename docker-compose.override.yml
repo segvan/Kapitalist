@@ -6,6 +6,7 @@ services:
       dockerfile: ./Kapitalist.Worker/Dockerfile.dev
     environment:
       - DOTNET_ENVIRONMENT=Development
+      - "RpcClients__RatesServiceClient__Host=kapitalist.pro"
     volumes:
       - ./Kapitalist.Worker/logs:/logs
 
@@ -16,11 +17,6 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
     volumes:
       - ./Kapitalist.Worker/logs:/logs
-    ports:
-      - 5010:5010
-      - 5011:5011
-    depends_on: 
-      - rates-db
   
   rates-db:
     environment:

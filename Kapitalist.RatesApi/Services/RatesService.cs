@@ -1,23 +1,30 @@
 using System.Threading.Tasks;
+using AutoMapper;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
-using Microsoft.Extensions.Logging;
+using Kapitalist.RatesApi.Commands;
+using Kapitalist.RatesApi.Proto;
+using MediatR;
+using ApiModel = Kapitalist.Common.ApiModels;
 
 namespace Kapitalist.RatesApi
 {
     public class RatesService : Proto.RatesService.RatesServiceBase
     {
-        private readonly ILogger<RatesService> logger;
+        private readonly IMediator mediator;
+        private readonly IMapper mapper;
 
-        public RatesService(ILogger<RatesService> logger)
+        public RatesService(IMediator mediator, IMapper mapper)
         {
-            this.logger = logger;
+            this.mediator = mediator;
+            this.mapper = mapper;
         }
 
-        public override Task<Empty> AddRatesSnapshot(Proto.RatesSnapshot request, ServerCallContext context)
+        public override async Task<Empty> AddRatesSnapshot(RatesSnapshot request, ServerCallContext context)
         {
-            logger.LogInformation(request.Source);
-            return Task.FromResult(new Empty());
+            var ratesSnapshot = mapper.Map<ApiModel.RatesSnapshot>(request);
+            await mediator.Send(new AddRatesSnapshot.Command(ratesSnapshot));
+            return new Empty();
         }
     }
 }

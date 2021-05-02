@@ -9,7 +9,8 @@ services:
     environment:
       - DOTNET_ENVIRONMENT=docker
       - "RpcClients__RatesServiceClient__Host=rates-api"
-      - "RpcClients__RatesServiceClient__Port=5011"
+    depends_on: 
+      - rates-api
 
   rates-api:
     build:
@@ -18,6 +19,11 @@ services:
     restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=docker
+    ports:
+      - 5010:5010
+      - 5011:5011
+    depends_on: 
+      - rates-db
 
   rates-db:
     image: postgres

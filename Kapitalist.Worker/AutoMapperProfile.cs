@@ -1,5 +1,7 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using Google.Protobuf.WellKnownTypes;
+using Kapitalist.Common.Enums;
 using Proto = Kapitalist.RatesGrpcClient.Proto;
 using ApiModel = Kapitalist.Common.ApiModels;
 
@@ -9,12 +11,10 @@ namespace Kapitalist.Worker
     {
         public AutoMapperProfile()
         {
+            CreateMap<DateTime, Timestamp>().ConvertUsing(x => Timestamp.FromDateTime(x));
+            CreateMap<RateType, int>().ConvertUsing(x => (int)x);
             CreateMap<ApiModel.Rate, Proto.Rate>();
-            CreateMap<ApiModel.RatesSnapshot, Proto.RatesSnapshot>()
-                .ForMember(dest => dest.RateType,
-                    opts => opts.MapFrom(x => (int) x.RateType))
-                .ForMember(dest => dest.TimeStamp,
-                    opts => opts.MapFrom(x => Timestamp.FromDateTime(x.TimeStamp)));
+            CreateMap<ApiModel.RatesSnapshot, Proto.RatesSnapshot>();
         }
     }
 }
