@@ -6,6 +6,10 @@ services:
       context: .
       dockerfile: ./Kapitalist.Worker/Dockerfile
     restart: always
+    environment:
+      - DOTNET_ENVIRONMENT=docker
+      - "RpcClients__RatesServiceClient__Host=rates-api"
+      - "RpcClients__RatesServiceClient__Port=5011"
 
   rates-api:
     build:

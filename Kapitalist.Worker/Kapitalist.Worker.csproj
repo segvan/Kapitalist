@@ -6,6 +6,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="10.1.1" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
         <PackageReference Include="Marvin.StreamExtensions" Version="1.2.0" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
@@ -14,6 +16,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Kapitalist.Common\Kapitalist.Common.csproj" />
+      <ProjectReference Include="..\Kapitalist.RatesGrpcClient\Kapitalist.RatesGrpcClient.csproj" />
     </ItemGroup>
 
     <ItemGroup>

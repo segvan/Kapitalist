@@ -1,0 +1,8 @@
+﻿{
+  "RpcClients": {
+    "RatesServiceClient": {
+      "Host": "localhost",
+      "Port": "5011"
+    }
+  }
+}

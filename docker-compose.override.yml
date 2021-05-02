@@ -4,6 +4,8 @@ services:
   worker:
     build:
       dockerfile: ./Kapitalist.Worker/Dockerfile.dev
+    environment:
+      - DOTNET_ENVIRONMENT=Development
     volumes:
       - ./Kapitalist.Worker/logs:/logs
 
