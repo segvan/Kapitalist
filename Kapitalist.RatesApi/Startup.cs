@@ -1,9 +1,12 @@
-﻿using Kapitalist.Common;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using Kapitalist.Common;
+using Kapitalist.Common.ApiModels;
+using Kapitalist.Common.Extensions;
 using Kapitalist.RatesApi.Database;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,19 +31,20 @@ namespace Kapitalist.RatesApi
 
             services.AddCommonServices();
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddFluentValidation();
 
-            services.AddGrpc();
+            services.AddTransient<IValidator<RatesSnapshot>, RatesSnapshotValidator>();
 
-            services
-                .AddEntityFrameworkNpgsql()
-                .AddDbContext<RatesDataContext>(options =>
-                {
-                    options.UseNpgsql(Configuration.GetConnectionString("AppDbContext"));
+            services.AddGrpc(options => { options.EnableDetailedErrors = true; });
+
+            services.AddDbContext<RatesDataContext>(options =>
+            {
+                options.UseNpgsql(Configuration.GetConnectionString("AppDbContext"));
 #if DEBUG
-                    options.EnableSensitiveDataLogging();
+                options.EnableSensitiveDataLogging();
 #endif
-                });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -51,14 +55,7 @@ namespace Kapitalist.RatesApi
             }
             else
             {
-                app.UseExceptionHandler(appBuilder =>
-                {
-                    appBuilder.Run(async context =>
-                    {
-                        context.Response.StatusCode = 500;
-                        await context.Response.WriteAsync("Internal Server Error.");
-                    });
-                });
+                app.UseProdExceptionHandler();
             }
 
             app.UseRouting();

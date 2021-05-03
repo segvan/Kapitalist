@@ -6,7 +6,8 @@ services:
       dockerfile: ./Kapitalist.Worker/Dockerfile.dev
     environment:
       - DOTNET_ENVIRONMENT=Development
-      - "RpcClients__RatesServiceClient__Host=kapitalist.pro"
+      - "RpcClients__RatesServiceClient__Host=rates-api" #kapitalist.pro
+      - "PlatformSettings__JobFrequencySeconds=60"
     volumes:
       - ./Kapitalist.Worker/logs:/logs
 
@@ -15,10 +16,13 @@ services:
       dockerfile: ./Kapitalist.RatesApi/Dockerfile.dev
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings__AppDbContext=Server=rates-db;Database=rates;Port=5432;User Id=postgres;Password=postgres_password;"
     volumes:
       - ./Kapitalist.Worker/logs:/logs
   
   rates-db:
+    ports:
+      - 5432:5432
     environment:
       - POSTGRES_PASSWORD=postgres_password
       - POSTGRES_DB=rates

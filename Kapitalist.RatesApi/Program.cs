@@ -1,8 +1,11 @@
 using System;
 using System.Threading.Tasks;
 using Kapitalist.Common;
+using Kapitalist.RatesApi.Database;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
@@ -17,7 +20,16 @@ namespace Kapitalist.RatesApi
             try
             {
                 Log.Information($"Starting ratesApi. Environment: '{EnvironmentHelpers.GetEnvironmentName()}'");
-                await CreateHostBuilder(args).Build().RunAsync();
+
+                var host = CreateHostBuilder(args).Build();
+
+                using (var scope = host.Services.CreateScope())
+                {
+                    var context = scope.ServiceProvider.GetRequiredService<RatesDataContext>();
+                    await context.Database.MigrateAsync();
+                }
+
+                await host.RunAsync();
             }
             catch (Exception exc)
             {

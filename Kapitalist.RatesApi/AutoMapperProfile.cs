@@ -1,7 +1,9 @@
 ﻿using System;
 using AutoMapper;
 using Google.Protobuf.WellKnownTypes;
+using Kapitalist.RatesApi.Proto;
 using ApiModel = Kapitalist.Common.ApiModels;
+using DB = Kapitalist.RatesApi.Models;
 
 namespace Kapitalist.RatesApi
 {
@@ -10,8 +12,11 @@ namespace Kapitalist.RatesApi
         public AutoMapperProfile()
         {
             CreateMap<Timestamp, DateTime>().ConvertUsing(x => x.ToDateTime());
-            CreateMap<Proto.Rate, ApiModel.Rate>();
-            CreateMap<Proto.RatesSnapshot, ApiModel.RatesSnapshot>();
+            CreateMap<Rate, ApiModel.Rate>();
+            CreateMap<RatesSnapshot, ApiModel.RatesSnapshot>();
+            
+            CreateMap<ApiModel.Rate, DB.Rate>().ReverseMap();
+            CreateMap<ApiModel.RatesSnapshot, DB.RatesSnapshot>().ReverseMap();
         }
     }
 }
