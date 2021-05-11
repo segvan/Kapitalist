@@ -5,7 +5,7 @@ namespace Kapitalist.Common.Extensions
 {
     public static class ApplicationBuilderExtensions
     {
-        public static void UseProdExceptionHandler(this IApplicationBuilder appBuilder)
+        public static IApplicationBuilder UseProdExceptionHandler(this IApplicationBuilder appBuilder)
         {
             appBuilder.UseExceptionHandler(a =>
             {
@@ -15,6 +15,19 @@ namespace Kapitalist.Common.Extensions
                     await context.Response.WriteAsync("Internal Server Error.");
                 });
             });
+
+            return appBuilder;
+        }
+
+        public static IApplicationBuilder UseSwagger(this IApplicationBuilder appBuilder, string title, string version)
+        {
+            appBuilder.UseSwagger();
+            appBuilder.UseSwaggerUI(o =>
+            {
+                o.SwaggerEndpoint($"/swagger/{version}/swagger.json", $"{title} - {version}");
+            });
+
+            return appBuilder;
         }
     }
 }

@@ -13,6 +13,10 @@ namespace Kapitalist.RatesApi.Controllers
             this.logger = logger;
         }
         
+        /// <summary>
+        /// Get All Rates.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("")]
         public IActionResult GetRates()
         {

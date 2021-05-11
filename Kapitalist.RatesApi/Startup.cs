@@ -31,6 +31,8 @@ namespace Kapitalist.RatesApi
 
             services.AddCommonServices();
 
+            services.AddSwagger("Rates Api", "v1");
+
             services.AddControllers()
                 .AddFluentValidation();
 
@@ -59,6 +61,8 @@ namespace Kapitalist.RatesApi
             }
 
             app.UseRouting();
+
+            app.UseSwagger("Rates Api", "v1");
 
             app.UseEndpoints(endpoints =>
             {
