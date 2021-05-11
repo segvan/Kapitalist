@@ -37,3 +37,12 @@ services:
       - 9010:80
     depends_on: 
       - rates-db
+
+  message-bus:
+    environment:
+      RABBITMQ_ERLANG_COOKIE: RABBITMQ_ERLANG_COOKIE
+      RABBITMQ_DEFAULT_USER: mb_admin
+      RABBITMQ_DEFAULT_PASS: mb_password
+    ports:
+      - 5672:5672
+      - 15672:15672

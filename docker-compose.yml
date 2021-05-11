@@ -28,3 +28,7 @@ services:
   rates-db:
     image: postgres
     restart: always
+
+  message-bus:
+    image: rabbitmq:3-management-alpine
+    restart: always
